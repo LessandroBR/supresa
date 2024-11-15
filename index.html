@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surpresa com Corações</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background: linear-gradient(45deg, #ff66b2, #ffccff);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        /* Partículas flutuando ao fundo */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            animation: floatParticle 5s infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(calc(100vw - 100px), calc(100vh - 100px));
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #fff;
+            margin: 0;
+            font-weight: 600;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4); /* Aumentando a sombra para melhorar o contraste */
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+            background-color: #ffffff;
+            color: #ff66b2;
+            border: 2px solid #ff66b2;
+            border-radius: 50px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #ff66b2;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .message {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #fff; /* Cor branca para boa visibilidade */
+            display: none;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+            max-width: 90%; 
+            font-family: 'Verdana', sans-serif;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6); /* Sombras mais fortes para melhorar o contraste */
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            color: #fff;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .message {
+                font-size: 1.5em;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>SABE POR QUE A LUA BRILHA TANTO?</h1>
+    <button onclick="mostrarMensagem()">CLIQUE AQUI E DESCUBRA</button>
+    <div class="message" id="mensagem">
+        PARA COMPETIR COM O BRILHO DE SEUS OLHOS AMANDINHA
+    </div>
+
+    <!-- Partículas flutuando ao fundo -->
+    <div class="particles">
+        <!-- Criando partículas aleatórias -->
+        <div class="particle" style="top: 10%; left: 20%; animation-duration: 6s;"></div>
+        <div class="particle" style="top: 30%; left: 50%; animation-duration: 7s;"></div>
+        <div class="particle" style="top: 50%; left: 80%; animation-duration: 5s;"></div>
+        <div class="particle" style="top: 70%; left: 10%; animation-duration: 8s;"></div>
+        <div class="particle" style="top: 80%; left: 60%; animation-duration: 6s;"></div>
+    </div>
+
+    <script>
+        function mostrarMensagem() {
+            // Exibir a mensagem no centro da tela
+            let mensagemElement = document.getElementById("mensagem");
+            mensagemElement.style.display = "block";
+
+            // Substituir a mensagem por uma nova com a frase
+            mensagemElement.innerHTML = `
+                PARA COMPETIR COM O BRILHO DE SEUS OLHOS AMANDINHA
+            `;
+
+            // Criar vários corações que sobem ao redor da tela
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDelay = `${Math.random() * 3}s`;
+                heart.textContent = "❤️";
+                document.body.appendChild(heart);
+
+                // Remover o coração após a animação
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+        }
+    </script>
+
+</body>
+</html>
